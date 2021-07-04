@@ -1,0 +1,78 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  nickname  String
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  quizes    Quiz[]
+  Answer    Answer[]
+}
+
+model Quiz {
+  id        String     @id @default(uuid())
+  title     String
+  userId    String
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  questions Question[]
+  user      User       @relation(fields: [userId], references: [id])
+  Answer    Answer[]
+}
+
+model Question {
+  id             String           @id @default(uuid())
+  title          String
+  quizId         String
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  quiz           Quiz             @relation(fields: [quizId], references: [id])
+  options        Option[]
+  AnswerQuestion AnswerQuestion[]
+}
+
+model Option {
+  id             String           @id @default(uuid())
+  title          String
+  questionId     String
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  question       Question         @relation(fields: [questionId], references: [id])
+  AnswerQuestion AnswerQuestion[]
+}
+
+model Answer {
+  id             String           @id @default(uuid())
+  userId         String
+  quizId         String
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  quiz           Quiz             @relation(fields: [quizId], references: [id])
+  user           User             @relation(fields: [userId], references: [id])
+  AnswerQuestion AnswerQuestion[]
+}
+
+model AnswerQuestion {
+  id         String   @id @default(uuid())
+  answerId   String
+  questionId String
+  optionId   String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  option     Option   @relation(fields: [optionId], references: [id])
+  question   Question @relation(fields: [questionId], references: [id])
+  anwer      Answer   @relation(fields: [answerId], references: [id])
+}
