@@ -74,5 +74,5 @@ model AnswerQuestion {
   updatedAt  DateTime @updatedAt
   option     Option   @relation(fields: [optionId], references: [id])
   question   Question @relation(fields: [questionId], references: [id])
-  anwer      Answer   @relation(fields: [answerId], references: [id])
+  answer     Answer   @relation(fields: [answerId], references: [id])
 }

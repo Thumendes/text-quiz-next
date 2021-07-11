@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 import { LoaderContextType } from "../types";
-import { FiLoader } from "react-icons/fi";
-import { Loader } from "../lib/ui";
+import { Loader } from "lib/ui";
 
 const LoaderContext = createContext({} as LoaderContextType);
 

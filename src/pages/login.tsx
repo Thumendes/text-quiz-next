@@ -1,13 +1,15 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import { FormGroup, Input, Title, Button } from "../lib/ui";
-import { useAuth } from "../context/AuthContext";
+import { FormGroup, Input, Title, Button } from "lib/ui";
+import { useAuth } from "context/AuthContext";
 import Link from "next/link";
 import Head from "next/head";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
 const LoginPage = () => {
   const { signIn } = useAuth();
   const [form, setForm] = useState({ username: "", password: "" });
   const [error, setError] = useState<string>(null);
+  const [passVisible, setPassVisible] = useState(true);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -27,7 +29,7 @@ const LoginPage = () => {
         <title>Login</title>
       </Head>
       <div className="w-screen h-screen flex items-center justify-center flex-col">
-        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+        <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
           <Title>Sign In</Title>
 
           {error && (
@@ -44,15 +46,21 @@ const LoginPage = () => {
             />
           </FormGroup>
 
-          <FormGroup>
+          <FormGroup className="relative">
             <label>Password</label>
             <Input
-              type="password"
+              type={passVisible ? "text" : "password"}
               name="password"
               value={form.password}
               placeholder="Password"
               onChange={handleChange}
             />
+            <div
+              className="absolute top-9 right-3"
+              onClick={() => setPassVisible(!passVisible)}
+            >
+              {passVisible ? <FiEyeOff /> : <FiEye />}
+            </div>
           </FormGroup>
 
           <Button>Sign In</Button>

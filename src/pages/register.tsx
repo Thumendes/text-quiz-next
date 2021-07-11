@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import { FormGroup, Input, Title, Button } from "../lib/ui";
-import { useAuth } from "../context/AuthContext";
+import { FormGroup, Input, Title, Button } from "lib/ui";
+import { useAuth } from "context/AuthContext";
 import Link from "next/link";
 import { RegisterFormType } from "../types";
 import Head from "next/head";
@@ -45,7 +45,7 @@ const RegisterPage = () => {
         <title>Register</title>
       </Head>
       <div className="w-screen h-screen flex items-center justify-center flex-col">
-        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+        <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
           <Title>Sign Up</Title>
           {error && (
             <div className="p-4 rounded-md bg-red-500 text-white">{error}</div>

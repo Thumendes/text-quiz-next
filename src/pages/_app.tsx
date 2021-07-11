@@ -1,7 +1,9 @@
-import "../styles/globals.css";
+import "styles/utilities.css";
+import "styles/base.css";
+import "styles/components.css";
 
-import AuthContextProvider from "../context/AuthContext";
-import LoaderContextProvider from "../context/LoaderContext";
+import AuthContextProvider from "context/AuthContext";
+import LoaderContextProvider from "context/LoaderContext";
 
 function MyApp({ Component, pageProps }) {
   return (

@@ -4,7 +4,8 @@ module.exports = {
     "./src/components/**/*.tsx",
     "./src/lib/**/*.tsx",
   ],
-  darkMode: false, // or 'media' or 'class'
+  mode: "jit",
+  darkMode: "class", // or 'media' or 'class'
   theme: {
     extend: {
       fontFamily: {
